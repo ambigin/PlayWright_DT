@@ -1,36 +1,70 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
-test('logs In to DealerTrack', async ({ page }) => {
-
-  await page.goto('https://signin.coxautoinc.com/?solutionID=DTCOM_qa&clientId=c98d164b51aa4e0587bb0d208766fe23');
-  await page.getByRole('textbox', { name: 'Username' }).click();
-  await page.getByRole('textbox', { name: 'Username' }).fill('bamaty');
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill('a%LA@Y9&G$%895M');
-  await page.getByRole('button', { name: 'Sign in' }).click();
-  await page.waitForTimeout(10000)
-
-  // await page.getByRole('button', {name: 'Select'}).click();
-  // await page.locator('#button-verify-by-sms').click();
-  await page.click("[id='button-verify-by-sms']");
-  await page.waitForTimeout(2000)
-
-  await page.locator('#nput-verification-code').fill('123145');
-  await page.getByRole('link', { name: 'Switch Dealership' }).click();
-  await page.getByRole('link', { name: 'Search' }).click();
-  await page.getByRole('link', { name: 'Digital Contracting of California' }).click();
+test('Create application', async ({ page }) => {
+  await page.goto('https://ww2.uat.dealertrack.app.coxautoinc.com/');
   await page.getByText('Create').click();
-  await page.getByRole('link', { name: 'Credit Application' }).click();
   await page.getByRole('link', { name: 'Credit Application' }).click();
   await page.getByRole('textbox', { name: 'First Name *' }).click();
   await page.getByRole('textbox', { name: 'First Name *' }).fill('Donald');
   await page.getByRole('textbox', { name: 'Last Name *' }).click();
   await page.getByRole('textbox', { name: 'Last Name *' }).fill('Minton');
-  await page.getByRole('button', { name: 'Create' }).click();
-  await page.goto('https://ww2.uat.dealertrack.app.coxautoinc.com/dealjackets/510200001047945747/deals/510200001047945750/application/one/#togglepage1');
+  await page.locator('button[id="deal-creator-search"]').click();
   await page.getByRole('radio', { name: 'Used' }).check();
   await page.getByRole('link', { name: 'Next' }).click();
-  await page.locator('button[name="_continue_"]').click();
-
+  await page.locator('input[name="applicant_form-middle_name"]').fill("A");
+  await page.getByRole('textbox', { name: 'SSN # *' }).click();
+  await page.getByRole('textbox', { name: 'SSN # *' }).fill("900-70-1234");
+  await page.getByRole('textbox', { name: 'DOB *' }).click();
+  await page.getByRole('textbox', { name: 'DOB *' }).fill("01/01/1964");
+  await page.getByRole('textbox', { name: 'Address 1 *' }).click();
+  await page.getByRole('textbox', { name: 'Address 1 *' }).fill('2 test');
+  await page.getByRole('textbox', { name: 'Zip *' }).click();
+  await page.getByRole('textbox', { name: 'Zip *' }).fill('96001');
+  await page.getByRole('textbox', { name: 'Home' }).click();
+  await page.getByRole('textbox', { name: 'Home' }).type("5049999999");
+  await page.locator('#id_applicant_form-housing_status_code').selectOption('O');
+  await page.getByRole('textbox', { name: 'Yrs. at Address *' }).click();
+  await page.getByRole('textbox', { name: 'Yrs. at Address *' }).fill('4');
+  await page.getByRole('textbox', { name: 'Mos. at Address *' }).click();
+  await page.getByRole('textbox', { name: 'Mos. at Address *' }).fill('2');
+  await page.getByRole('textbox', { name: 'Mort. Payment/Rent *' }).click();
+  await page.getByRole('textbox', { name: 'Mort. Payment/Rent *' }).fill('800');
+  await page.locator('#id_applicant_form-employment_status_code').selectOption('Y');
+  await page.getByRole('textbox', { name: 'Employer *', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Employer *', exact: true }).fill('test');
+  await page.getByRole('textbox', { name: 'Yrs. at Employer *' }).click();
+  await page.getByRole('textbox', { name: 'Yrs. at Employer *' }).fill('2');
+  await page.getByRole('textbox', { name: 'Mos. at Employer *' }).click();
+  await page.getByRole('textbox', { name: 'Mos. at Employer *' }).fill('2');
+  await page.getByRole('textbox', { name: 'Business Phone' }).click();
+  await page.getByRole('textbox', { name: 'Business Phone' }).type("5049999999");
+  await page.getByRole('textbox', { name: 'Expected Salary *' }).click();
+  await page.getByRole('textbox', { name: 'Expected Salary *' }).fill('10000');
+  await page.locator('#id_applicant_form-salary_type_code').selectOption('M');
+  await page.getByRole('textbox', { name: 'VIN' }).click({
+    modifiers: ['ControlOrMeta']
+  });
+  await page.getByRole('textbox', { name: 'VIN' }).fill('5YJXCBE42LF264694');
+  await page.getByRole('textbox', { name: 'Wholesale Value *' }).click();
+  await page.getByRole('textbox', { name: 'Wholesale Value *' }).fill('45000');
+  await page.getByRole('textbox', { name: 'Odometer *' }).click();
+  await page.getByRole('textbox', { name: 'Odometer *' }).fill('1000');
+  await page.getByRole('textbox', { name: 'Term *' }).click();
+  await page.getByRole('textbox', { name: 'Term *' }).fill('60');
+  await page.getByRole('textbox', { name: 'Cash Selling Price *' }).click();
+  await page.getByRole('textbox', { name: 'Cash Selling Price *' }).fill('30000');
+  await page.getByRole('textbox', { name: 'Sales Tax *' }).click();
+  await page.getByRole('textbox', { name: 'Sales Tax *' }).fill('0');
+  await page.getByRole('textbox', { name: 'T&L (estimate) *' }).click();
+  await page.getByRole('textbox', { name: 'T&L (estimate) *' }).fill('0');
+  await page.getByRole('textbox', { name: 'Cash Down' }).click();
+  await page.getByRole('textbox', { name: 'Cash Down' }).fill('10000');
+  await page.getByText('Unpaid Balance Cap Cost Term').click();
+  await page.locator('#id_applicant_form-city_state_dropdown').selectOption('KESWICK|CA');
+  await page.getByRole('checkbox', { name: 'Not Provided By Customer' }).check();
+  await page.click('button[name="_continue_"]');
+  await page.click('button[name="_ap_continue_"]');
+  await page.getByRole('checkbox', { name: 'First Help Financial' }).check();
+  await page.click('button[name="_finish_"]');
+  await page.waitForTimeout(50000);
 });
