@@ -1,70 +1,65 @@
 import { test } from '@playwright/test';
+import { CreateApplicationPage } from '../PageService/CreateApplicationPage';
+import { VehicleTypeEnum } from '../Enum/vehicleTypeEnum';
+import { housingStatusEnum } from '../Enum/HousingStatusEnum';
+import { employmentStatusEnum } from '../Enum/employmentStatusEnum';
+import { payFrequencyEnum } from '../Enum/payFrequencyEnum';
+import { pageUrlEnum } from '../Enum/pageUrlEnum';
+const applicantInfo = require('../Testdata/Applicant/700pa.json')
+const collateralInfo = require('../Testdata/Collateral/NS.json');
 
-test('Create application', async ({ page }) => {
-  await page.goto('https://ww2.uat.dealertrack.app.coxautoinc.com/');
-  await page.getByText('Create').click();
-  await page.getByRole('link', { name: 'Credit Application' }).click();
-  await page.getByRole('textbox', { name: 'First Name *' }).click();
-  await page.getByRole('textbox', { name: 'First Name *' }).fill('Donald');
-  await page.getByRole('textbox', { name: 'Last Name *' }).click();
-  await page.getByRole('textbox', { name: 'Last Name *' }).fill('Minton');
-  await page.locator('button[id="deal-creator-search"]').click();
-  await page.getByRole('radio', { name: 'Used' }).check();
-  await page.getByRole('link', { name: 'Next' }).click();
-  await page.locator('input[name="applicant_form-middle_name"]').fill("A");
-  await page.getByRole('textbox', { name: 'SSN # *' }).click();
-  await page.getByRole('textbox', { name: 'SSN # *' }).fill("900-70-1234");
-  await page.getByRole('textbox', { name: 'DOB *' }).click();
-  await page.getByRole('textbox', { name: 'DOB *' }).fill("01/01/1964");
-  await page.getByRole('textbox', { name: 'Address 1 *' }).click();
-  await page.getByRole('textbox', { name: 'Address 1 *' }).fill('2 test');
-  await page.getByRole('textbox', { name: 'Zip *' }).click();
-  await page.getByRole('textbox', { name: 'Zip *' }).fill('96001');
-  await page.getByRole('textbox', { name: 'Home' }).click();
-  await page.getByRole('textbox', { name: 'Home' }).type("5049999999");
-  await page.locator('#id_applicant_form-housing_status_code').selectOption('O');
-  await page.getByRole('textbox', { name: 'Yrs. at Address *' }).click();
-  await page.getByRole('textbox', { name: 'Yrs. at Address *' }).fill('4');
-  await page.getByRole('textbox', { name: 'Mos. at Address *' }).click();
-  await page.getByRole('textbox', { name: 'Mos. at Address *' }).fill('2');
-  await page.getByRole('textbox', { name: 'Mort. Payment/Rent *' }).click();
-  await page.getByRole('textbox', { name: 'Mort. Payment/Rent *' }).fill('800');
-  await page.locator('#id_applicant_form-employment_status_code').selectOption('Y');
-  await page.getByRole('textbox', { name: 'Employer *', exact: true }).click();
-  await page.getByRole('textbox', { name: 'Employer *', exact: true }).fill('test');
-  await page.getByRole('textbox', { name: 'Yrs. at Employer *' }).click();
-  await page.getByRole('textbox', { name: 'Yrs. at Employer *' }).fill('2');
-  await page.getByRole('textbox', { name: 'Mos. at Employer *' }).click();
-  await page.getByRole('textbox', { name: 'Mos. at Employer *' }).fill('2');
-  await page.getByRole('textbox', { name: 'Business Phone' }).click();
-  await page.getByRole('textbox', { name: 'Business Phone' }).type("5049999999");
-  await page.getByRole('textbox', { name: 'Expected Salary *' }).click();
-  await page.getByRole('textbox', { name: 'Expected Salary *' }).fill('10000');
-  await page.locator('#id_applicant_form-salary_type_code').selectOption('M');
-  await page.getByRole('textbox', { name: 'VIN' }).click({
-    modifiers: ['ControlOrMeta']
-  });
-  await page.getByRole('textbox', { name: 'VIN' }).fill('5YJXCBE42LF264694');
-  await page.getByRole('textbox', { name: 'Wholesale Value *' }).click();
-  await page.getByRole('textbox', { name: 'Wholesale Value *' }).fill('45000');
-  await page.getByRole('textbox', { name: 'Odometer *' }).click();
-  await page.getByRole('textbox', { name: 'Odometer *' }).fill('1000');
-  await page.getByRole('textbox', { name: 'Term *' }).click();
-  await page.getByRole('textbox', { name: 'Term *' }).fill('60');
-  await page.getByRole('textbox', { name: 'Cash Selling Price *' }).click();
-  await page.getByRole('textbox', { name: 'Cash Selling Price *' }).fill('30000');
-  await page.getByRole('textbox', { name: 'Sales Tax *' }).click();
-  await page.getByRole('textbox', { name: 'Sales Tax *' }).fill('0');
-  await page.getByRole('textbox', { name: 'T&L (estimate) *' }).click();
-  await page.getByRole('textbox', { name: 'T&L (estimate) *' }).fill('0');
-  await page.getByRole('textbox', { name: 'Cash Down' }).click();
-  await page.getByRole('textbox', { name: 'Cash Down' }).fill('10000');
-  await page.getByText('Unpaid Balance Cap Cost Term').click();
-  await page.locator('#id_applicant_form-city_state_dropdown').selectOption('KESWICK|CA');
-  await page.getByRole('checkbox', { name: 'Not Provided By Customer' }).check();
-  await page.click('button[name="_continue_"]');
-  await page.click('button[name="_ap_continue_"]');
-  await page.getByRole('checkbox', { name: 'First Help Financial' }).check();
-  await page.click('button[name="_finish_"]');
-  await page.waitForTimeout(50000);
+const ApplicantData = {
+    firstName: applicantInfo.firstName,
+    lastName: applicantInfo.lastName,
+    vehicleType: VehicleTypeEnum.Used,
+    ssn: applicantInfo.SSN,
+    dob: applicantInfo.dateOfBirth,
+    address: applicantInfo.address,
+    zip: applicantInfo.postalCode,
+    phone: 5041235698,
+    email: "test@gmail.com",
+    housing: {
+        status: housingStatusEnum.Family,
+        years: 4,
+        months: 4,
+        rent: 1200,
+    },
+    employment: {
+        status: employmentStatusEnum.Employed,
+        employer: "test",
+        years: 4,
+        months: 3,
+        phone: 3125431321,
+        income: 10000,
+        frequency: payFrequencyEnum.Monthly,
+    },
+    vehicle: {
+        vin: collateralInfo.vin,
+        price: collateralInfo.totalCashPrice,
+        mileage: collateralInfo.mileage,
+    },
+    financial: {
+        term: 66,
+        cashPrice: collateralInfo.totalCashPrice,
+        salesTax: 200,
+        tAndL: 0,
+        downPayment: collateralInfo.downPayment,
+    },
+};
+
+test("Create app", async ({ page }) => {
+    await page.goto(pageUrlEnum.CreateApplication);
+    const createApplicationPage = new CreateApplicationPage(page);
+    await createApplicationPage.FirstAndLastName(ApplicantData.firstName, ApplicantData.lastName);
+    await createApplicationPage.selectVehicleType(ApplicantData.vehicleType);
+    await createApplicationPage.clickNextBtn();
+    await createApplicationPage.fillApplicantInfo(ApplicantData.ssn, ApplicantData.dob, ApplicantData.address, ApplicantData.zip, ApplicantData.phone, ApplicantData.email);
+    await createApplicationPage.fillHousingInfo(ApplicantData.housing.status,ApplicantData.housing.years,ApplicantData.housing.months,ApplicantData.housing.rent);
+    await createApplicationPage.fillEmploymentInfo(ApplicantData.employment.status, ApplicantData.employment.employer,ApplicantData.employment.years,ApplicantData.employment.months, ApplicantData.employment.phone,ApplicantData.employment.income, ApplicantData.employment.frequency);
+    await createApplicationPage.fillVehicleInfo(ApplicantData.vehicle.vin,ApplicantData.vehicle.price,ApplicantData.vehicle.mileage)
+    await createApplicationPage.fillFinancialInfo(ApplicantData.financial.term, ApplicantData.financial.cashPrice, ApplicantData.financial.salesTax,ApplicantData.financial.tAndL, ApplicantData.financial.downPayment);
+    await createApplicationPage.clickContinueBtn();
+    await createApplicationPage.clickContinueToLender();
+    await createApplicationPage.selectEligibleLender();
+    await createApplicationPage.clickSubmitBtn();
 });

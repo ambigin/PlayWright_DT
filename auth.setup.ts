@@ -1,22 +1,18 @@
 import { chromium,FullConfig } from "@playwright/test";
+import { pageUrlEnum } from "./Enum/pageUrlEnum";
+import { LoginPage } from "./PageService/LoginPage";
+import { HomePage } from "./PageService/homePage";
 
 async function globalSetup(config: FullConfig) {
     const browser = await chromium.launch({ headless: false });
     const page = await browser.newPage();
-    await page.goto('https://signin.coxautoinc.com/?solutionID=DTCOM_qa&clientId=c98d164b51aa4e0587bb0d208766fe23');
-    await page.getByRole('textbox', { name: 'Username' }).click();
-    await page.getByRole('textbox', { name: 'Username' }).fill('');
-    await page.getByRole('button', { name: 'Next' }).click();
-    await page.getByRole('textbox', { name: 'Password' }).click();
-    await page.getByRole('textbox', { name: 'Password' }).fill('');
-    await page.getByRole('button', { name: 'Sign in' }).click();
+    const loginPage = new LoginPage(page);
+    const homePage = new HomePage(page);
+    await page.goto(pageUrlEnum.LoginPage);
+    await loginPage.login("","")
     await page.pause();
-    await page.getByRole('link', { name: 'Switch Dealership' }).click();
-    await page.getByRole('link', { name: 'Search' }).click();
-    await page.getByRole('link', { name: 'Digital Contracting of California' }).click();
-
+    await homePage.selectDealer("Digital Contracting of California");
     await page.context().storageState({ path: 'auth.json' });
-
     await browser.close();
 }
 
