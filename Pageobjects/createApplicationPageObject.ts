@@ -1,57 +1,66 @@
 export class createApplicationPageObject{
     //First page
-    static firstNameIdLocator = "id_first_name-maskedInput";
-    static lastNameIdLocator = "id_last_name-maskedInput";
-    static createBtnIdLocator = "deal-creator-search";
+    static firstName: ['textbox', string] = ['textbox', 'First Name'];
+    static lastName: ['textbox', string] = ['textbox', 'Last Name'];
+    static createBtn: ['button', string] = ['button', 'Create'];
 
     //Second page
     static nextBtnIdLocator = "prepage a";
+    static nextBtn: ['link', string] = ['link','Next'];
+
 
     //Applicant Info
-    static ssnIdLocator = "id_applicant_form-tax_id";
-    static dobIdLocator = "id_applicant_form-birth_date";
-    static addressIdLocator = "id_applicant_form-line_1_address";
-    static zipIdLocator = "id_applicant_form-zip_code";
-    static homePhoneIdLocator = "id_applicant_form-primary_phone_number";
-    static emailIdLocator = "id_applicant_form-email_address";
-    static cityIdLocator = "id_applicant_form-city_state_dropdown"
+    static ssn: ['textbox', string] = ['textbox', 'SSN #'];
+    static dob: ['textbox', string] = ['textbox', 'DOB'];
+    static address: ['textbox', string] = ['textbox', 'Address 1'];
+    static zip: ['textbox', string] = ['textbox', 'ZIP'];
+    static homePhone: ['textbox', string] = ['textbox', 'Home'];
+    static email: ['textbox', string] = ['textbox', 'Email'];
+    static city: ['combobox', string] = ['combobox', 'City & State'];
 
-    // Housing
-    static housingStatusIdLocator = "id_applicant_form-housing_status_code";
-    static yearsAtAddressIdLocator = "id_applicant_form-current_address_years";
-    static monthAtAddressIdLocator = "id_applicant_form-current_address_months";
-    static rentIdLocator = "id_applicant_form-mortgage_payment_or_rent";
-    
-    //Employment
-    static employentStatusIdLocator = "id_applicant_form-employment_status_code";
+    // Address Info
+    static housingStatus: ['combobox', string] = ['combobox', 'Housing Status'];
+    static yearsAtAddress: ['textbox', string] = ['textbox', 'Yrs. at Address'];
+    static monthsAtAddress: ['textbox', string] = ['textbox', 'Mos. at Address'];
+    static rent: ['textbox', string] = ['textbox', 'Mort. Payment/Rent'];
+
+    // Employment
+    static employmentStatus: ['combobox', string] = ['combobox', 'Employment Status'];
     static employerIdLocator = "id_applicant_form-organization_name";
-    static yrsAtEmployerIdLocator = "id_applicant_form-current_employed_years";
-    static mthAtEmployerIdLocator = "id_applicant_form-current_employed_months";
-    static businessPhoneIdLocator = "id_applicant_form-work_phone_number";
-    static salaryIdLocator = "id_applicant_form-salary";
-    static payFrequencyIdLocator = "id_applicant_form-salary_type_code";
+    static yearsAtEmployer: ['textbox', string] = ['textbox', 'Yrs. at Employer'];
+    static monthsAtEmployer: ['textbox', string] = ['textbox', 'Mos. at Employer'];
+    static businessPhone: ['textbox', string] = ['textbox', 'Business Phone'];
+    static salary: ['textbox', string] = ['textbox', 'Expected Salary'];
+    static payFrequency: ['combobox', string] = ['combobox', 'Pay Frequency'];
 
-    //Vehicle Info
-    static vinIdLocator = "id_vehicle_form-vin_number";
-    static wholeSaleValueIdLocator = "id_vehicle_form-wholesale_amount";
-    static odometerIdLocator = "id_vehicle_form-odometer_number";
+    // Vehicle Info
+    static vin: ['textbox', string] = ['textbox', 'VIN'];
+    static wholesaleValue: ['textbox', string] = ['textbox', 'Wholesale Value'];
+    static odometer: ['textbox', string] = ['textbox', 'Odometer'];
 
-    //Financial Info
-    static termIdLocator = "id_vehicle_form-term_count";
-    static cashPriceIdLocator = "id_vehicle_form-cash_sell_price_amount";
-    static salesTaxIdLocator = "id_vehicle_form-sales_tax_amount";
-    static tAndLIdLocator = "id_vehicle_form-title_and_license_amount";
-    static downPaymentIdLocator = "id_vehicle_form-cash_down_amount";
+    // Trade-in
+    static addTradeIn: ['radio', string] = ['radio', 'Yes'];
+    static tradeInYear: ['combobox', string] = ['combobox', 'Year'];
+    static tradeInMake: ['combobox', string] = ['combobox', 'Make'];
+    static tradeInModel: ['combobox', string] = ['combobox', 'Model'];
+    static tradeInTrim: ['combobox', string] = ['combobox', 'Trim'];
 
-    //Create application
+    // Financial Info
+    static term: ['textbox', string] = ['textbox', 'Term'];
+    static cashPrice: ['textbox', string] = ['textbox', 'Cash Selling Price'];
+    static salesTax: ['textbox', string] = ['textbox', 'Sales Tax'];
+    static titleAndLicense: ['textbox', string] = ['textbox', 'T&L (estimate)'];
+    static downPayment: ['textbox', string] = ['textbox', 'Cash Down'];
+    static netTrade: ['textbox', string] = ['textbox', 'Net Trade'];
+
+    // Buttons
     static continueBtnIdLocator = "one-page-v4-form button";
+    static continueToLender: ['button', string] = ['button', 'Continue to Lenders'];
+    static submitBtn: ['button', string] = ['button', 'Submit'];
 
-    // Confirm address modal
-    static continueToLenderIdLocator = "address_parser_modal button";
+    // Lender selection
+    static lenderSelection: ['checkbox', string] = ['checkbox', 'First Help Financial'];
 
-    //Select lender
-    static lenderSelectionNameLocator = "lenders";
-    static submitBtnNameLocator = "_finish_";
 
     
 

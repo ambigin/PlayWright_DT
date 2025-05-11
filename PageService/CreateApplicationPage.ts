@@ -17,61 +17,77 @@ export class CreateApplicationPage{
     }
 
     async FirstAndLastName(firstName:string,lastName:string){
-        await this.defaultPage.getById(createApplicationPageObject.firstNameIdLocator).fill(firstName);
-        await this.defaultPage.getById(createApplicationPageObject.lastNameIdLocator).fill(lastName);
-        await this.defaultPage.getById(createApplicationPageObject.createBtnIdLocator).click();
+        await this.defaultPage.getByRole(...createApplicationPageObject.firstName).fill(firstName);
+        await this.defaultPage.getByRole(...createApplicationPageObject.lastName).fill(lastName);
+        await this.defaultPage.getByRole(...createApplicationPageObject.createBtn).click();
     }
 
     async selectVehicleType(vehicle: VehicleTypeEnum){
-        await this.defaultPage.getById(vehicle).check();
+        const [role,label] = vehicle.split(',');
+        await this.defaultPage.getByRole(role as 'radio',label).check();
     }
 
     async clickNextBtn(){
-        await this.defaultPage.getById(createApplicationPageObject.nextBtnIdLocator).click();
+        await this.defaultPage.getByRole(...createApplicationPageObject.nextBtn).click();
     }
 
     async fillApplicantInfo(ssn:number,dob:string,address:string,zip:string,homePhone:number,email:string){
-        await this.defaultPage.getById(createApplicationPageObject.ssnIdLocator).type(ssn.toString());
-        await this.defaultPage.getById(createApplicationPageObject.dobIdLocator).type(dob);
-        await this.defaultPage.getById(createApplicationPageObject.addressIdLocator).fill(address);
-        await this.defaultPage.getById(createApplicationPageObject.zipIdLocator).fill(zip.toString());
-        await this.defaultPage.getById(createApplicationPageObject.homePhoneIdLocator).type(homePhone.toString());
-        await this.defaultPage.getById(createApplicationPageObject.emailIdLocator).fill(email); 
-        const city = await this.defaultPage.getById(createApplicationPageObject.cityIdLocator);
+        await this.defaultPage.getByRole(...createApplicationPageObject.ssn).type(ssn.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.dob).type(dob);
+        await this.defaultPage.getByRole(...createApplicationPageObject.address).fill(address);
+        await this.defaultPage.getByRole(...createApplicationPageObject.zip).fill(zip.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.homePhone).type(homePhone.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.email).fill(email);
+        const city = await this.defaultPage.getByRole(...createApplicationPageObject.city);
         await expect(city).toBeAttached();
         const firstOptionValue = this.defaultPage.getFirstOptionValueFromDropdown(city);
         await this.defaultPage.selectDropdown(city,await firstOptionValue);
         }
 
     async fillHousingInfo(housingStatus:housingStatusEnum,yrsAtAddress:number,mthAtAddress:number,rent:number){
-        await this.defaultPage.selectDropdown(this.defaultPage.getById(createApplicationPageObject.housingStatusIdLocator),housingStatus)
-        await this.defaultPage.getById(createApplicationPageObject.yearsAtAddressIdLocator).fill(yrsAtAddress.toString());
-        await this.defaultPage.getById(createApplicationPageObject.monthAtAddressIdLocator).fill(mthAtAddress.toString());
-        await this.defaultPage.getById(createApplicationPageObject.rentIdLocator).fill(rent.toString());
+        await this.defaultPage.selectDropdown(this.defaultPage.getByRole(...createApplicationPageObject.housingStatus),housingStatus)
+        await this.defaultPage.getByRole(...createApplicationPageObject.yearsAtAddress).fill(yrsAtAddress.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.monthsAtAddress).fill(mthAtAddress.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.rent).fill(rent.toString());
     }
 
     async fillEmploymentInfo(employentStatus:employmentStatusEnum,employer:string,yrs:number,mth:number,businessPhone:number,salary:number,payFrequency:payFrequencyEnum){
-        await this.defaultPage.selectDropdown(this.defaultPage.getById(createApplicationPageObject.employentStatusIdLocator),employentStatus);
+        await this.defaultPage.selectDropdown(this.defaultPage.getByRole(...createApplicationPageObject.employmentStatus),employentStatus);
         await this.defaultPage.getById(createApplicationPageObject.employerIdLocator).fill(employer);
-        await this.defaultPage.getById(createApplicationPageObject.yrsAtEmployerIdLocator).fill(yrs.toString());
-        await this.defaultPage.getById(createApplicationPageObject.mthAtEmployerIdLocator).fill(mth.toString());
-        await this.defaultPage.getById(createApplicationPageObject.businessPhoneIdLocator).type(businessPhone.toString());
-        await this.defaultPage.getById(createApplicationPageObject.salaryIdLocator).fill(salary.toString());
-        await this.defaultPage.selectDropdown(this.defaultPage.getById(createApplicationPageObject.payFrequencyIdLocator),payFrequency);
+        await this.defaultPage.getByRole(...createApplicationPageObject.yearsAtEmployer).fill(yrs.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.monthsAtEmployer).fill(mth.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.businessPhone).type(businessPhone.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.salary).fill(salary.toString());
+        await this.defaultPage.selectDropdown(this.defaultPage.getByRole(...createApplicationPageObject.payFrequency),payFrequency);
     }
 
     async fillVehicleInfo(vin:string,vehicleValue:number,odometer:number){
-        await this.defaultPage.getById(createApplicationPageObject.vinIdLocator).fill(vin);
-        await this.defaultPage.getById(createApplicationPageObject.wholeSaleValueIdLocator).fill(vehicleValue.toString());
-        await this.defaultPage.getById(createApplicationPageObject.odometerIdLocator).fill(odometer.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.vin).fill(vin);
+        await this.defaultPage.getByRole(...createApplicationPageObject.wholesaleValue).fill(vehicleValue.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.odometer).fill(odometer.toString());
     }
 
-    async fillFinancialInfo(term:number,cashPrice:number,salesTax:number,tAndL:number,downPayment:number){
-        await this.defaultPage.getById(createApplicationPageObject.termIdLocator).fill(term.toString());
-        await this.defaultPage.getById(createApplicationPageObject.cashPriceIdLocator).fill(cashPrice.toString());
-        await this.defaultPage.getById(createApplicationPageObject.salesTaxIdLocator).fill(salesTax.toString());
-        await this.defaultPage.getById(createApplicationPageObject.tAndLIdLocator).fill(tAndL.toString());
-        await this.defaultPage.getById(createApplicationPageObject.downPaymentIdLocator).fill(downPayment.toString());
+    async fillTradeInInfo(year:number, make:string){
+        await this.defaultPage.getByRole(...createApplicationPageObject.addTradeIn).check();
+        await this.defaultPage.selectDropdown(this.defaultPage.getByRole(...createApplicationPageObject.tradeInYear),year.toString());
+        await this.defaultPage.selectDropdown(this.defaultPage.getByRole(...createApplicationPageObject.tradeInMake),make);
+        const model = this.defaultPage.getByRole(...createApplicationPageObject.tradeInModel);
+        const firstModel = this.defaultPage.getFirstOptionValueFromDropdown(model);
+        await this.defaultPage.selectDropdown(model,await firstModel);
+        const trim = this.defaultPage.getByRole(...createApplicationPageObject.tradeInTrim);
+        const firstTrim = this.defaultPage.getFirstOptionValueFromDropdown(trim);
+        await this.defaultPage.selectDropdown(model,await firstTrim);
+    }
+
+    async fillFinancialInfo(term:number,cashPrice:number,salesTax:number,tAndL:number,downPayment:number,netTrade?:number){
+        await this.defaultPage.getByRole(...createApplicationPageObject.term).fill(term.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.cashPrice).fill(cashPrice.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.salesTax).fill(salesTax.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.titleAndLicense).fill(tAndL.toString());
+        await this.defaultPage.getByRole(...createApplicationPageObject.downPayment).fill(downPayment.toString());
+        if(netTrade!=undefined){
+            await this.defaultPage.getByRole(...createApplicationPageObject.netTrade).fill(netTrade.toString());
+        }
     }
 
     async clickContinueBtn(){
@@ -79,15 +95,15 @@ export class CreateApplicationPage{
     }
 
     async clickContinueToLender(){
-        await this.defaultPage.getById(createApplicationPageObject.continueToLenderIdLocator).click();
+        await this.defaultPage.getByRole(...createApplicationPageObject.continueToLender).click();
     }
 
     async selectEligibleLender(){
-        await this.defaultPage.getByName(createApplicationPageObject.lenderSelectionNameLocator).check();
+        await this.defaultPage.getByRole(...createApplicationPageObject.lenderSelection).check();
     }
 
     async clickSubmitBtn(){
-        await this.defaultPage.getByName(createApplicationPageObject.submitBtnNameLocator).click();
+        await this.defaultPage.getByRole(...createApplicationPageObject.submitBtn).click();
     }
 
 }

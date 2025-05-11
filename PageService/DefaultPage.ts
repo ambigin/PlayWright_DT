@@ -27,6 +27,14 @@ export class DefaultPage{
         return this.page.locator('a',{ hasText: `${text}`});
     }
 
+    // getByRole(role: Parameters<Page['getByRole']>[0], name: string) {
+    //     return this.page.getByRole(role, { name });
+    // }
+    
+    getByRole(role: Parameters<Page['getByRole']>[0], name: string) {
+        return this.page.getByRole(role, { name });
+    }
+
     selectDropdown(locator:Locator, value:string | null){
         return locator.selectOption(value);
     }

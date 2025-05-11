@@ -38,12 +38,17 @@ const ApplicantData = {
         price: collateralInfo.totalCashPrice,
         mileage: collateralInfo.mileage,
     },
+    tradeIn: {
+        year: 2023,
+        make: "Toyota"
+    },
     financial: {
         term: 66,
         cashPrice: collateralInfo.totalCashPrice,
         salesTax: 200,
         tAndL: 0,
         downPayment: collateralInfo.downPayment,
+        netTrade: 5000
     },
 };
 
@@ -57,9 +62,15 @@ test("Create app", async ({ page }) => {
     await createApplicationPage.fillHousingInfo(ApplicantData.housing.status,ApplicantData.housing.years,ApplicantData.housing.months,ApplicantData.housing.rent);
     await createApplicationPage.fillEmploymentInfo(ApplicantData.employment.status, ApplicantData.employment.employer,ApplicantData.employment.years,ApplicantData.employment.months, ApplicantData.employment.phone,ApplicantData.employment.income, ApplicantData.employment.frequency);
     await createApplicationPage.fillVehicleInfo(ApplicantData.vehicle.vin,ApplicantData.vehicle.price,ApplicantData.vehicle.mileage)
+    
+    // Uncomment the next line to add trade in
+    // await createApplicationPage.fillTradeInInfo(ApplicantData.tradeIn.year,ApplicantData.tradeIn.make);
+
+    //When adding net trade, make sure to add ApplicantData.financial.netTrade in fillFinancialInfo function below.
     await createApplicationPage.fillFinancialInfo(ApplicantData.financial.term, ApplicantData.financial.cashPrice, ApplicantData.financial.salesTax,ApplicantData.financial.tAndL, ApplicantData.financial.downPayment);
     await createApplicationPage.clickContinueBtn();
     await createApplicationPage.clickContinueToLender();
+    await page.pause();
     await createApplicationPage.selectEligibleLender();
     await createApplicationPage.clickSubmitBtn();
 });

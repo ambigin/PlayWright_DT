@@ -9,7 +9,7 @@ async function globalSetup(config: FullConfig) {
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
     await page.goto(pageUrlEnum.LoginPage);
-    await loginPage.login("","")
+    await loginPage.login(" "," ")
     await page.pause();
     await homePage.selectDealer("Digital Contracting of California");
     await page.context().storageState({ path: 'auth.json' });
