@@ -12,10 +12,10 @@ export class LoginPage{
     }
 
     async login(username:string,password:string){
-        await this.defaultPage.getByName(loginPageObject.usernameNameLocator).fill(username);
-        await this.defaultPage.getById(loginPageObject.loginIdLocator).click();
-        await this.defaultPage.getByName(loginPageObject.passwordNameLocator).click();
-        await this.defaultPage.getByName(loginPageObject.passwordNameLocator).fill(password);
-        await this.defaultPage.getById(loginPageObject.loginIdLocator).click();
+        await this.defaultPage.getByRole(...loginPageObject.usernameNameLocator).fill(username);
+        await this.defaultPage.getByRole(...loginPageObject.nextBtn).click();
+        await this.defaultPage.getByRole(...loginPageObject.passwordNameLocator).click();
+        await this.defaultPage.getByRole(...loginPageObject.passwordNameLocator).fill(password);
+        await this.defaultPage.getByRole(...loginPageObject.signInBtn).click();
     }
 }

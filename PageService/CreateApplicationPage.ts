@@ -22,6 +22,10 @@ export class CreateApplicationPage{
         await this.defaultPage.getByRole(...createApplicationPageObject.createBtn).click();
     }
 
+    async MiddleName(){
+        await this.defaultPage.getByRole(...createApplicationPageObject.middleName).fill("A");
+    }
+
     async selectVehicleType(vehicle: VehicleTypeEnum){
         const [role,label] = vehicle.split(',');
         await this.defaultPage.getByRole(role as 'radio',label).check();

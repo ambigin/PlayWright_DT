@@ -10,6 +10,7 @@ export class createApplicationPageObject{
 
 
     //Applicant Info
+    static middleName:['textbox', string] = ['textbox', 'Middle Initial'];
     static ssn: ['textbox', string] = ['textbox', 'SSN #'];
     static dob: ['textbox', string] = ['textbox', 'DOB'];
     static address: ['textbox', string] = ['textbox', 'Address 1'];

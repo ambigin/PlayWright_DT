@@ -12,8 +12,8 @@ export class HomePage{
     }
 
     async selectDealer(dealer:string){
-        await this.defaultPage.getById(homePageObject.switchDealerBtnIdLocator).click();
-        await this.defaultPage.getByLinkText(homePageObject.searchLinkTextLocator).click();
+        await this.defaultPage.getByRole(...homePageObject.switchDealerBtn).click();
+        await this.defaultPage.getByRole(...homePageObject.searchLink).click();
         await this.defaultPage.getByLinkText(homePageObject.selectDealerLinkTextLocator(dealer)).click();
     }
 }

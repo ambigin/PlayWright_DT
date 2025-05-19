@@ -27,6 +27,10 @@ export class DefaultPage{
         return this.page.locator('a',{ hasText: `${text}`});
     }
 
+    getByText(text:string){
+        return this.page.getByText(text);
+    }
+
     // getByRole(role: Parameters<Page['getByRole']>[0], name: string) {
     //     return this.page.getByRole(role, { name });
     // }

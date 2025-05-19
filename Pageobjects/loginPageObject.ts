@@ -1,6 +1,7 @@
 export class loginPageObject{
-    static usernameNameLocator = "username";
-    static passwordNameLocator = "password";
-    static loginIdLocator = "signIn";
+    static usernameNameLocator: ["textbox", string] = ["textbox","Username"];
+    static passwordNameLocator: ["textbox", string] = ["textbox","Password"];
+    static nextBtn: ["button", string] = ["button","Next"];
+    static signInBtn: ["button", string] = ["button","Sign in"];
 
 }

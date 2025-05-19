@@ -58,6 +58,7 @@ test("Create app", async ({ page }) => {
     await createApplicationPage.FirstAndLastName(ApplicantData.firstName, ApplicantData.lastName);
     await createApplicationPage.selectVehicleType(ApplicantData.vehicleType);
     await createApplicationPage.clickNextBtn();
+    // await createApplicationPage.MiddleName();
     await createApplicationPage.fillApplicantInfo(ApplicantData.ssn, ApplicantData.dob, ApplicantData.address, ApplicantData.zip, ApplicantData.phone, ApplicantData.email);
     await createApplicationPage.fillHousingInfo(ApplicantData.housing.status,ApplicantData.housing.years,ApplicantData.housing.months,ApplicantData.housing.rent);
     await createApplicationPage.fillEmploymentInfo(ApplicantData.employment.status, ApplicantData.employment.employer,ApplicantData.employment.years,ApplicantData.employment.months, ApplicantData.employment.phone,ApplicantData.employment.income, ApplicantData.employment.frequency);
@@ -70,7 +71,6 @@ test("Create app", async ({ page }) => {
     await createApplicationPage.fillFinancialInfo(ApplicantData.financial.term, ApplicantData.financial.cashPrice, ApplicantData.financial.salesTax,ApplicantData.financial.tAndL, ApplicantData.financial.downPayment);
     await createApplicationPage.clickContinueBtn();
     await createApplicationPage.clickContinueToLender();
-    await page.pause();
     await createApplicationPage.selectEligibleLender();
     await createApplicationPage.clickSubmitBtn();
 });
